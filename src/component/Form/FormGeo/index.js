@@ -51,16 +51,16 @@ class FormGeo
    render() {
         return (
             <div>
-                <button id="hours" onClick={this.onOffClick}>24 hours</button>
-                <button id="day" onClick={this.onOffClick}>5 days</button>
-                <button id="weeks" onClick={this.onOffClick}>16 days</button>
-
                 <form className="App-search" onSubmit={this.onFormSubmit.bind(this)}>
                     <fieldset>
                     <input type="text" placeholder="City name here" id="cityField" />
                     <button className="button" type="submit">Get Weather</button>
                     </fieldset>
                 </form>
+                <button id="hours" onClick={this.onOffClick}>24 hours</button>
+                <button id="day" onClick={this.onOffClick}>5 days</button>
+                <button id="weeks" onClick={this.onOffClick}>16 days</button>
+                
                 { !this.state.isToggleOn ?
                     "" :
                     this.state.weather && this.state.weather.length > 0 ?
