@@ -40,7 +40,7 @@ class Form extends Component {
                 this.setState({
                     forecast: res.list
                 }, function() {
-                    // forecase is here now
+                    // forecast is here now
                 });
             })
             .catch(function(error) {
