@@ -31,6 +31,7 @@ class Day extends Component {
                     <br />
                     Humidity {this.props.interval.main.humidity} %
                     </div>
+
                 </div>
             </div>
         );

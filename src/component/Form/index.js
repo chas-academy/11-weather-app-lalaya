@@ -18,15 +18,6 @@ class Form extends Component {
         return response; 
     }
 
-    groupBy(array, property) {
-        return array.reduce(function(groups, item) {
-          const interval = groups[property];
-          groups[interval] = groups[interval] || [];
-          groups[interval].push(interval);
-          return groups;
-        });
-    }
-
     // Sending for API request 
     onFormSubmit(e) {
         e.preventDefault();
@@ -59,12 +50,12 @@ render() {
         </form>
         { this.state.weather && this.state.weather.length > 0 ?
             <div className="App-weather">
-            <img src={`http://openweathermap.org/img/w/${this.state.weather[0].icon}.png`} title="Title goes here" alt="A weather icon, describing the... weather" />
+            <img src={`http://openweathermap.org/img/w/${this.state.weather[0].icon}.png`} title="Title goes here" alt="A weather icon, describing the weather" />
             <p>
                 {this.state.weather[0].description}
             </p>
             </div>
-            : <p>No results yet, try searching above.</p>
+            : <p>No results, try again.</p>
         }
         { this.state.forecast && this.state.forecast.length > 0 ?
             <div className="App-forecast">
