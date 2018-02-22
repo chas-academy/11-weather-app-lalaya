@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './Day.css';
+import './Weeks.css';
 
-class Day extends Component {
+class Weeks extends Component {
     constructor(props) {
       super(props);
     }
@@ -15,7 +15,7 @@ class Day extends Component {
                     </div>
 
                     <div>
-                    <h4>{this.props.interval.weather[0].id}</h4>
+                    <h4>{`this.props.interval.weather[0].id`}</h4>
                     </div>
 
                     <div>
@@ -38,4 +38,4 @@ class Day extends Component {
     }
 }
 
-export default Day; 
+export default Weeks; 

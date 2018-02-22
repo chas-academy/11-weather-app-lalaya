@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import Hour from '../Hour';
 import Day from '../Day';
+import Weeks from '../Weeks';
 
 import './Form.css';
 
@@ -7,7 +9,9 @@ class Form extends Component {
     constructor() {
       super();
       this.state = {
-        forecast: []
+        forecast: [],
+        visible: false
+        
       }
     }
 
@@ -18,7 +22,12 @@ class Form extends Component {
         return response; 
     }
 
-    // Sending for API request 
+
+    onToggleVisibility(e) {
+        this.state.visible = !this.state.visible;
+    }
+
+    // Sending for API request for 5 days 
     onFormSubmit(e) {
         e.preventDefault();
         const cityname = e.nativeEvent.target.elements[1].value;
@@ -42,22 +51,23 @@ class Form extends Component {
 render() {
     return (
         <div>
+        <button id="show-result" onClick={this.onToggleVisibility.bind(this)}>toggle visibility</button>
         <form className="App-search" onSubmit={this.onFormSubmit.bind(this)}>
             <fieldset>
             <input type="text" placeholder="City name here" id="cityField" />
             <button className="button button-primary" type="submit">Get Weather</button>
             </fieldset>
         </form>
-        { this.state.weather && this.state.weather.length > 0 ?
+        { this.state.visible && this.state.weather && this.state.weather.length > 0 ?
             <div className="App-weather">
-            <img src={`http://openweathermap.org/img/w/${this.state.weather[0].icon}.png`} title="Title goes here" alt="A weather icon, describing the weather" />
+            <img src={`http://openweathermap.org/img/w/${this.state.weather[0].icon}.png`} title="Title goes here" alt="A weather icon that describes the weather" />
             <p>
                 {this.state.weather[0].description}
             </p>
             </div>
             : <p>No results, try again.</p>
         }
-        { this.state.forecast && this.state.forecast.length > 0 ?
+        { this.state.visible && this.state.forecast && this.state.forecast.length > 0 ?
             <div className="App-forecast">
             {
                 this.state.forecast.map((interval, index) => { 
@@ -69,6 +79,8 @@ render() {
         }
         </div>
     );
+
+      
     }
 }
 
