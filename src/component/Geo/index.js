@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './Day.css';
+import './Geo.css';
 
-class Day extends Component {
+class Geo extends Component {
     constructor(props) {
       super(props);
     }
@@ -37,4 +37,4 @@ class Day extends Component {
     }
 }
 
-export default Day; 
+export default Geo; 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Hour.css';
+import './Hourly.css';
 
 class Hour extends Component {
     constructor(props) {
