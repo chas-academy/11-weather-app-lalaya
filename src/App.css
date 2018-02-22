@@ -25,6 +25,15 @@
   font-size: large;
 }
 
+.button {
+  background-color: rgb(76, 97, 187);
+  border-color: rgb(76, 97, 187);
+}
+
+#cityField {
+  width: 80%; 
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

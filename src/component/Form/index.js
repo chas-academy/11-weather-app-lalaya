@@ -9,22 +9,25 @@ class Form extends Component {
     constructor() {
       super();
       this.state = {
-        forecast: [],
-        visible: false
-        
-      }
+        isToggleOn: false, 
+        forecast: [], 
+       }
+    
+       this.onOffClick = this.onOffClick.bind(this); 
     }
+
+    onOffClick() {
+        this.setState(prevState => ({
+            isToggleOn: !prevState.isToggleOn
+        })); 
+    }
+
 
     handleError(response) {
         if (!response.ok) {
             throw new Error(response.statusText);
         }
         return response; 
-    }
-
-
-    onToggleVisibility(e) {
-        this.state.visible = !this.state.visible;
     }
 
     // Sending for API request for 5 days 
@@ -51,14 +54,19 @@ class Form extends Component {
 render() {
     return (
         <div>
-        <button id="show-result" onClick={this.onToggleVisibility.bind(this)}>toggle visibility</button>
+        <button id="show-result" onClick={this.onOffClick}>24 hours</button>
+        <button id="show-result" onClick={this.onOffClick}>5 days</button>
+        <button id="show-result" onClick={this.onOffClick}>16 days</button>
+
         <form className="App-search" onSubmit={this.onFormSubmit.bind(this)}>
             <fieldset>
             <input type="text" placeholder="City name here" id="cityField" />
-            <button className="button button-primary" type="submit">Get Weather</button>
+            <button className="button" type="submit">Get Weather</button>
             </fieldset>
         </form>
-        { this.state.visible && this.state.weather && this.state.weather.length > 0 ?
+        { !this.state.isToggleOn ?
+            "" :
+            this.state.weather && this.state.weather.length > 0 ?
             <div className="App-weather">
             <img src={`http://openweathermap.org/img/w/${this.state.weather[0].icon}.png`} title="Title goes here" alt="A weather icon that describes the weather" />
             <p>
@@ -67,7 +75,9 @@ render() {
             </div>
             : <p>No results, try again.</p>
         }
-        { this.state.visible && this.state.forecast && this.state.forecast.length > 0 ?
+        { !this.state.isToggleOn ? 
+            "" :
+          this.state.forecast && this.state.forecast.length > 0 ?
             <div className="App-forecast">
             {
                 this.state.forecast.map((interval, index) => { 
