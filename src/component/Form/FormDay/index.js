@@ -7,9 +7,21 @@ class FormDay extends Component {
     constructor(props) {
       super(props);
       this.state = {
+        isToggleOn: false, 
         forecast: [], 
       }
-      
+
+        this.onOffClick = this.onOffClick.bind(this); 
+    }
+
+    componentDidMount() {
+        this.search(this.props.searchForCity);
+    }
+
+    onOffClick() {
+        this.setState(prevState => ({
+            isToggleOn: !prevState.isToggleOn
+        })); 
     }
 
     handleError(response) {
@@ -22,14 +34,12 @@ class FormDay extends Component {
     // API for 5 days 
     search(cityname) { 
 
-        fetch(`https://api.openweathermap.org/data/2.5/forecast/?q=${cityname}&APPID=638dd182cc3405c7e786b4d6e5cd0c80&units=metric`)
+        fetch(`https://api.openweathermap.org/data/2.5/forecast/?q=${cityname}&APPID=d87dbcdd5af33f7b33168db052c38feb&units=metric`)
             .then(this.handleErrors)
             .then(res => res.json())
             .then(res => {
                 this.setState({
                     forecast: res.list
-                }, function() {
-                    // forecast is here now
                 });
             })
             .catch(function(error) {
@@ -39,12 +49,9 @@ class FormDay extends Component {
 
 
    render() {
-
-        this.search(this.props.searchForCity);
-
         return (
             <div>
-                {
+                { 
                 this.state.forecast && this.state.forecast.length > 0 ?
                     <div className="App-forecast">
                     {

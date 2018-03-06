@@ -15,7 +15,7 @@ class Hour extends Component {
                     </div>
 
                     <div>
-                    <h4>{`this.props.interval.weather[0].id`}</h4>
+                        <h4>{this.props.interval.weather[0].id}</h4>
                     </div>
 
                     <div>
