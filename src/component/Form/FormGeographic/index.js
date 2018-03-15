@@ -1,15 +1,14 @@
-/* import React, { Component } from 'react';
-import Geo from '../../Geo';
+import React, { Component } from 'react';
+import Geographic from '../../Geographic';
 
+import './FormGeographic.css';
 
-import './FormGeo.css';
-
-class FormGeo extends Component {
+class FormGeographic extends Component {
     constructor(props) {
       super(props);
       this.state = {
         isToggleOn: false, 
-        weather: null
+        daily: null
       }
     
        this.onOffClick = this.onOffClick.bind(this); 
@@ -23,7 +22,7 @@ class FormGeo extends Component {
         this.setState(prevState => ({
             isToggleOn: !prevState.isToggleOn
         })); 
-    }
+    } 
 
     handleError(response) {
         if (!response.ok) {
@@ -32,17 +31,16 @@ class FormGeo extends Component {
         return response; 
     }
 
-
-    // API Geo
+    // API for Geographic
     search (cityname) {
-        // q=${cityname}&APPID=d87dbcdd5af33f7b33168db052c38feb&units=metric
 
-        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityname}&APPID=d87dbcdd5af33f7b33168db052c38feb&units=metric`)
+        fetch(`https://api.openweathermap.org/data/2.5/forecast/daily?q=${cityname}&APPID=d87dbcdd5af33f7b33168db052c38feb&units=metric&cnt=14`)
+
             .then(this.handleErrors)
             .then(res => res.json())
             .then(res => {
                 this.setState({
-                    weather: res
+                    daily: res.list
                 });
             })
             .catch(function(error) {
@@ -54,11 +52,11 @@ class FormGeo extends Component {
         return (
             <div>
                 <div className="App-forecast">
-                {this.state.weather && <Geo interval={this.state.weather} />}
+                {this.state.daily && <Geographic interval={this.state.daily} />}
                 </div>
             </div>
         );     
     }
 }
 
-export default FormHourly; */ 
+export default FormGeographic;

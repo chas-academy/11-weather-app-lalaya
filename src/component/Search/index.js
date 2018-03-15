@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FormHourly from '../Form/FormHourly';
 import FormDay from '../Form/FormDay';
-import FormWeeks from '../Form/FormWeeks';
+import FormGeographic from '../Form/FormGeographic';
 
 import './Search.css';
 
@@ -16,7 +16,7 @@ class Search
     
       this.hourlyButtonClicked = this.hourlyButtonClicked.bind(this); 
       this.dayButtonClicked = this.dayButtonClicked.bind(this); 
-      this.weeksButtonClicked = this.weeksButtonClicked.bind(this); 
+      this.GeographicButtonClicked = this.GeographicButtonClicked.bind(this); 
 
     }
 
@@ -28,8 +28,8 @@ class Search
         this.setState({resultsMode : 'Day'});
     }
 
-    weeksButtonClicked() {
-        this.setState({resultsMode : 'Weeks'});
+    GeographicButtonClicked() {
+        this.setState({resultsMode : 'Geographic'});
     }
 
 
@@ -52,8 +52,8 @@ class Search
                 return <FormHourly searchForCity={this.state.searchForCity}/>
             case "Day":
                 return <FormDay searchForCity={this.state.searchForCity}/>
-            case "Weeks":
-                return <FormWeeks searchForCity={this.state.searchForCity}/>
+            case "Geographic":
+                return <FormGeographic searchForCity={this.state.searchForCity}/>
             default:
                 return null;
        }
@@ -71,7 +71,7 @@ class Search
                 </form>
                 <button id="hourly" onClick={this.hourlyButtonClicked}>24 hours</button>
                 <button id="days" onClick={this.dayButtonClicked}>5 days</button>
-                <button id="weeks" onClick={this.weeksButtonClicked}>16 days</button>
+                <button id="Geographic" onClick={this.GeographicButtonClicked}>Where r u at?</button>
                 <div>
                     {Forecast}
                 </div>

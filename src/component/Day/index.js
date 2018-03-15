@@ -19,6 +19,10 @@ class Day extends Component {
                     </div>
 
                     <div>
+                        <i className={`owf owf-${this.props.interval.weather[0].id}`} />
+                    </div>
+                    
+                    <div>
                     {this.props.interval.main.temp} &deg; Celcius 
                     <br />
                     Highest {this.props.interval.main.temp_max} &deg; C

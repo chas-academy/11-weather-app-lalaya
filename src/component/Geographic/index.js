@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './Weeks.css';
+import './Geographic.css';
 
-class Weeks extends Component {
+class Geographic extends Component {
     constructor(props) {
       super(props);
     }
@@ -38,4 +38,4 @@ class Weeks extends Component {
     }
 }
 
-export default Weeks; 
+export default Geographic; 

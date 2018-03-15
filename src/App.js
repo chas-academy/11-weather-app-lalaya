@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Header, Content, Search, FormGeo, FormHourly, FormDay, FormWeeks, Footer } from './component'; 
+import { Header, Content, Search, FormHourly, FormDay, FormGeographic, Footer } from './component'; 
 // import logo from './logo.svg';
 import './App.css';
 
