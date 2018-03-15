@@ -41,6 +41,8 @@ class FormDay extends Component {
                 this.setState({
                     forecast: res.list
                 });
+                console.log(this.state.forecast);
+
             })
             .catch(function(error) {
                 console.log(error);

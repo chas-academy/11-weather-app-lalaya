@@ -6,60 +6,60 @@ import FormGeographic from '../Form/FormGeographic';
 import './Search.css';
 
 class Search
- extends Component {
-    constructor(props) {
-      super(props);
-      this.state = { 
-        resultsMode : '',
-        searchForCity: ''
-      }
-    
-      this.hourlyButtonClicked = this.hourlyButtonClicked.bind(this); 
-      this.dayButtonClicked = this.dayButtonClicked.bind(this); 
-      this.GeographicButtonClicked = this.GeographicButtonClicked.bind(this); 
-
-    }
-
-    hourlyButtonClicked() {
-        this.setState({resultsMode : 'Hourly'});
-    }
-
-    dayButtonClicked() {
-        this.setState({resultsMode : 'Day'});
-    }
-
-    GeographicButtonClicked() {
-        this.setState({resultsMode : 'Geographic'});
-    }
-
-
-    handleError(response) {
-        if (!response.ok) {
-            throw new Error(response.statusText);
+    extends Component {
+        constructor(props) {
+        super(props);
+        this.state = { 
+            resultsMode : '',
+            searchForCity: ''
         }
-        return response; 
+        
+        this.hourlyButtonClicked = this.hourlyButtonClicked.bind(this); 
+        this.dayButtonClicked = this.dayButtonClicked.bind(this); 
+        this.GeographicButtonClicked = this.GeographicButtonClicked.bind(this); 
+
+        }
+
+        hourlyButtonClicked() {
+            this.setState({resultsMode : 'Hourly'});
+        }
+
+        dayButtonClicked() {
+            this.setState({resultsMode : 'Day'});
+        }
+
+        GeographicButtonClicked() {
+            this.setState({resultsMode : 'Geographic'});
+        }
+
+
+        handleError(response) {
+            if (!response.ok) {
+                throw new Error(response.statusText);
+            }
+            return response; 
+        }
+
+        onFormSubmit(e) {
+            e.preventDefault();
+            const cityname = e.nativeEvent.target.elements[1].value;
+            this.setState({searchForCity: cityname});
     }
 
-    onFormSubmit(e) {
-        e.preventDefault();
-        const cityname = e.nativeEvent.target.elements[1].value;
-        this.setState({searchForCity: cityname});
-   }
+    renderForecastComponent = () => {
+            switch (this.state.resultsMode) {
+                case "Hourly":
+                    return <FormHourly searchForCity={this.state.searchForCity}/>
+                case "Day":
+                    return <FormDay searchForCity={this.state.searchForCity}/>
+                case "Geographic":
+                    return <FormGeographic searchForCity={this.state.searchForCity}/>
+                default:
+                    return null;
+        }
+    }
 
-   renderForecastComponent = () => {
-        switch (this.state.resultsMode) {
-            case "Hourly":
-                return <FormHourly searchForCity={this.state.searchForCity}/>
-            case "Day":
-                return <FormDay searchForCity={this.state.searchForCity}/>
-            case "Geographic":
-                return <FormGeographic searchForCity={this.state.searchForCity}/>
-            default:
-                return null;
-       }
-   }
-
-   render() {
+    render() {
         const Forecast = this.renderForecastComponent();
         return (
             <div>
