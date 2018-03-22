@@ -11,7 +11,7 @@ class Day extends Component {
         return (
             <div>
                 <div>
-                    <div className="row">
+                <div className="small-2 medium-3 column weather-icon">
                         <h4>{this.props.interval.dt_txt}</h4>
                     </div>
 

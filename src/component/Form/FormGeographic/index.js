@@ -8,7 +8,7 @@ class FormGeographic extends Component {
       super(props);
       this.state = {
         isToggleOn: false, 
-        daily: null
+        geographic: null
       }
     
        this.onOffClick = this.onOffClick.bind(this); 
@@ -33,14 +33,12 @@ class FormGeographic extends Component {
 
     // API for Geographic
     search (cityname) {
-
-        fetch(`https://api.openweathermap.org/data/2.5/forecast/daily?q=${cityname}&APPID=d87dbcdd5af33f7b33168db052c38feb&units=metric&cnt=14`)
-
+        fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${this.state.latitude}&lon=${this.state.longitude}&APPID=d87dbcdd5af33f7b33168db052c38feb&units=metric&cnt=14`)
             .then(this.handleErrors)
             .then(res => res.json())
             .then(res => {
                 this.setState({
-                    daily: res.list
+                    geographic: res.list
                 });
             })
             .catch(function(error) {
@@ -52,7 +50,7 @@ class FormGeographic extends Component {
         return (
             <div>
                 <div className="App-forecast">
-                {this.state.daily && <Geographic interval={this.state.daily} />}
+                {this.state.geographic && <Geographic interval={this.state.geographic} />}
                 </div>
             </div>
         );     

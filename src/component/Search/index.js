@@ -16,7 +16,7 @@ class Search
         
         this.hourlyButtonClicked = this.hourlyButtonClicked.bind(this); 
         this.dayButtonClicked = this.dayButtonClicked.bind(this); 
-        this.GeographicButtonClicked = this.GeographicButtonClicked.bind(this); 
+        this.geographicButtonClicked = this.geographicButtonClicked.bind(this); 
 
         }
 
@@ -28,10 +28,13 @@ class Search
             this.setState({resultsMode : 'Day'});
         }
 
-        GeographicButtonClicked() {
+        geographicButtonClicked() {
             this.setState({resultsMode : 'Geographic'});
         }
 
+        /* chooseTemperatureClicked() {
+            this.setState({resultMode : ''})
+        } */ 
 
         handleError(response) {
             if (!response.ok) {
@@ -71,7 +74,10 @@ class Search
                 </form>
                 <button id="hourly" onClick={this.hourlyButtonClicked}>24 hours</button>
                 <button id="days" onClick={this.dayButtonClicked}>5 days</button>
-                <button id="Geographic" onClick={this.GeographicButtonClicked}>Where r u at?</button>
+                <button id="geographic" onClick={this.geographicButtonClicked}>Where r u at?</button>
+                <div>
+                <button id="chooseTemperature" onClick={this.chooseTemperatureClicked}>&deg; C/ F</button>
+                </div>
                 <div>
                     {Forecast}
                 </div>
