@@ -13,7 +13,7 @@ class Hour extends Component {
                 <div className="small-2 medium-3 column weather-icon">
 
                         <div>
-                            <img src={`http://openweathermap.org/img/w/${this.props.interval.weather[0].icon}.png`} title="Title goes here" alt="A weather icon, describing the... weather" />
+                            <img src={`http://openweathermap.org/img/w/${this.props.interval.weather[0].icon}.png`} title="Title goes here" alt="A weather icon" />
                         </div>
 
                         <div>

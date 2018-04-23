@@ -11,7 +11,8 @@ class Search
         super(props);
         this.state = { 
             resultsMode : '',
-            searchForCity: ''
+            searchForCity: '',
+            posi: []
         }
         
         this.hourlyButtonClicked = this.hourlyButtonClicked.bind(this); 
@@ -32,9 +33,9 @@ class Search
             this.setState({resultsMode : 'Geographic'});
         }
 
-        /* chooseTemperatureClicked() {
+        chooseTemperatureClicked() {
             this.setState({resultMode : ''})
-        } */ 
+        } 
 
         handleError(response) {
             if (!response.ok) {
@@ -43,6 +44,7 @@ class Search
             return response; 
         }
 
+
         onFormSubmit(e) {
             e.preventDefault();
             const cityname = e.nativeEvent.target.elements[1].value;
@@ -50,16 +52,25 @@ class Search
     }
 
     renderForecastComponent = () => {
+        console.log(this.state.posi);
             switch (this.state.resultsMode) {
                 case "Hourly":
                     return <FormHourly searchForCity={this.state.searchForCity}/>
                 case "Day":
                     return <FormDay searchForCity={this.state.searchForCity}/>
                 case "Geographic":
-                    return <FormGeographic searchForCity={this.state.searchForCity}/>
+                    return <FormGeographic geographic={this.state.posi}/>
                 default:
                     return null;
         }
+    }
+
+    componentDidMount() {
+        navigator.geolocation.getCurrentPosition((pos) => {
+            this.setState({
+                posi: [pos.coords.longitude.toFixed(5), pos.coords.latitude.toFixed(5)] 
+            })
+        });     
     }
 
     render() {

@@ -35,7 +35,6 @@ class FormHourly extends Component {
 
     // API for 24 hours
     search (cityname) {
-
         fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityname}&APPID=d87dbcdd5af33f7b33168db052c38feb&units=metric`)
             .then(this.handleErrors)
             .then(res => res.json())

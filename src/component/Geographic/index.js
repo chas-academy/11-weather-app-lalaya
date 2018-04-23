@@ -7,13 +7,15 @@ class Geographic extends Component {
     }
 
     render() {
+        console.log(this.props);
         return (
             <div>
                 <div>
-                    <div className="row">
+                {this.props.main ? (
 
+                    <div className="row">
                         <div>
-                            <img src={`http://openweathermap.org/img/w/${this.props.interval.weather[0].icon}.png`} title="Title goes here" alt="A weather icon, describing the... weather" />
+                            <img src={`http://openweathermap.org/img/w/${this.props.interval.weather[0].icon}.png`} title="Title goes here" alt="A weather icon" />
                         </div>
 
                         <div>
@@ -29,7 +31,11 @@ class Geographic extends Component {
                             <br />
                             Humidity {this.props.interval.main.humidity} %
                         </div>
+               
                     </div>
+                ) : (
+                    ""
+                )}
                 </div>
             </div>
         );
