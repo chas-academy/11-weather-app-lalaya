@@ -2,20 +2,15 @@ import React, { Component } from 'react';
 import './Geographic.css';
 
 class Geographic extends Component {
-    constructor(props) {
-      super(props);
-    }
-
     render() {
-        console.log(this.props);
+        console.log("rendering geographic", this.props);
         return (
             <div>
-                <div>
-                {this.props.main ? (
+                {this.props.interval.main ? (
 
-                    <div className="row">
+                    <div className="small-2 medium-3 column weather-icon">
                         <div>
-                            <img src={`http://openweathermap.org/img/w/${this.props.interval.weather[0].icon}.png`} title="Title goes here" alt="A weather icon" />
+                            <img src={`http://openweathermap.org/img/w/${this.props.interval.weather[0].icon}.png`} title="Weather Icon" alt="A weather icon" />
                         </div>
 
                         <div>
@@ -30,13 +25,11 @@ class Geographic extends Component {
                             Wind speed {this.props.interval.wind.speed} m/s
                             <br />
                             Humidity {this.props.interval.main.humidity} %
-                        </div>
-               
+                        </div>           
                     </div>
                 ) : (
                     ""
                 )}
-                </div>
             </div>
         );
     }

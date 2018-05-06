@@ -2,18 +2,13 @@ import React, { Component } from 'react';
 import './Hourly.css';
 
 class Hour extends Component {
-    constructor(props) {
-      super(props);
-    }
-
     render() {
         return (
             <div>
-                <div>
                 <div className="small-2 medium-3 column weather-icon">
 
                         <div>
-                            <img src={`http://openweathermap.org/img/w/${this.props.interval.weather[0].icon}.png`} title="Title goes here" alt="A weather icon" />
+                            <img src={`http://openweathermap.org/img/w/${this.props.interval.weather[0].icon}.png`} title="Weather Icon" alt="A weather icon" />
                         </div>
 
                         <div>
@@ -31,7 +26,6 @@ class Hour extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
         );
     }
 }

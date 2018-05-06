@@ -12,7 +12,7 @@ class Search
         this.state = { 
             resultsMode : '',
             searchForCity: '',
-            posi: []
+            position: []
         }
         
         this.hourlyButtonClicked = this.hourlyButtonClicked.bind(this); 
@@ -30,11 +30,30 @@ class Search
         }
 
         geographicButtonClicked() {
-            this.setState({resultsMode : 'Geographic'});
+            navigator.geolocation.getCurrentPosition((pos) => {
+
+                this.setState({
+                    position: {
+                        "longitude" : pos.coords.longitude.toFixed(5), 
+                        "latitude"  : pos.coords.latitude.toFixed(5)
+                    }
+                });
+
+                this.setState({resultsMode : 'Geographic'});
+            },
+            (error) => {
+                console.log(error);
+            },
+            {
+                timeout: 10000,
+                enableHighAccuracy : false
+            }
+            );
+
         }
 
         chooseTemperatureClicked() {
-            this.setState({resultMode : ''})
+            this.setState({resultMode : ''});
         } 
 
         handleError(response) {
@@ -49,28 +68,23 @@ class Search
             e.preventDefault();
             const cityname = e.nativeEvent.target.elements[1].value;
             this.setState({searchForCity: cityname});
-    }
+        }
 
     renderForecastComponent = () => {
-        console.log(this.state.posi);
             switch (this.state.resultsMode) {
                 case "Hourly":
                     return <FormHourly searchForCity={this.state.searchForCity}/>
                 case "Day":
                     return <FormDay searchForCity={this.state.searchForCity}/>
                 case "Geographic":
-                    return <FormGeographic geographic={this.state.posi}/>
+                    return <FormGeographic geographic={this.state.position}/>
                 default:
                     return null;
         }
     }
 
     componentDidMount() {
-        navigator.geolocation.getCurrentPosition((pos) => {
-            this.setState({
-                posi: [pos.coords.longitude.toFixed(5), pos.coords.latitude.toFixed(5)] 
-            })
-        });     
+
     }
 
     render() {

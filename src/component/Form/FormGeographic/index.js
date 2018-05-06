@@ -9,17 +9,12 @@ class FormGeographic extends Component {
       this.state = {
         isToggleOn: false, 
         geographic: null,
-
+        coordinates: props.geographic
       }
     
        this.onOffClick = this.onOffClick.bind(this); 
     }
 
-    /* componentDidMount() {
-        this.search(this.props.searchForCity);
-    } */ 
-
-    
     onOffClick() {
         this.setState(prevState => ({
             isToggleOn: !prevState.isToggleOn
@@ -35,9 +30,9 @@ class FormGeographic extends Component {
     
     /* API for Geographic */ 
     componentDidMount() {
-        console.log(this.props);
-        if((this.state.longitude && this.state.latitude) !== 0) {
-            fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${this.state.latitude}&lon=${this.state.longitude}&APPID=d87dbcdd5af33f7b33168db052c38feb`)
+        
+        if((this.state.coordinates.longitude && this.state.coordinates.latitude) !== 0) {
+            fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${this.state.coordinates.latitude}&lon=${this.state.coordinates.longitude}&APPID=d87dbcdd5af33f7b33168db052c38feb&units=metric`)
             .then(this.handleErrors)
             .then(res => res.json())
             .then(res => {
