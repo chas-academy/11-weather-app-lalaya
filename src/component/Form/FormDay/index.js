@@ -15,7 +15,11 @@ class FormDay extends Component {
     }
 
     componentDidMount() {
-        this.search(this.props.searchForCity);
+        this.search(this.props.searchForCity, this.props.unit);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.search(nextProps.searchForCity, nextProps.unit);
     }
 
     onOffClick() {
@@ -32,16 +36,15 @@ class FormDay extends Component {
     }
 
     // API for 5 days 
-    search(cityname) { 
+    search(cityname, unit) { 
 
-        fetch(`https://api.openweathermap.org/data/2.5/forecast/?q=${cityname}&APPID=d87dbcdd5af33f7b33168db052c38feb&units=metric`)
+        fetch(`https://api.openweathermap.org/data/2.5/forecast/?q=${cityname}&APPID=d87dbcdd5af33f7b33168db052c38feb&units=${unit}`)
             .then(this.handleErrors)
             .then(res => res.json())
             .then(res => {
                 this.setState({
                     forecast: res.list
                 });
-                console.log(this.state.forecast);
 
             })
             .catch(function(error) {
@@ -58,7 +61,7 @@ class FormDay extends Component {
                     <div className="App-forecast">
                     {
                         this.state.forecast.map((interval, index) => { 
-                            return <Day key={index} interval={interval} />
+                            return <Day key={index} interval={interval}  unitInfo={this.props.unitInfo} />
                         })
                     }
                     </div>

@@ -4,6 +4,7 @@ import './Hourly.css';
 class Hour extends Component {
     render() {
         return (
+            (this.props.interval.weather == null && <br />) || 
             <div>
                 <div className="small-2 medium-3 column weather-icon">
 
@@ -12,11 +13,11 @@ class Hour extends Component {
                         </div>
 
                         <div>
-                            {this.props.interval.main.temp} &deg; Celcius 
+                            {this.props.interval.main.temp} &deg; {this.props.unitInfo.name} 
                             <br />
-                            Highest {this.props.interval.main.temp_max} &deg; C
+                            Highest {this.props.interval.main.temp_max} &deg; {this.props.unitInfo.short}
                             <br />
-                            Lowest {this.props.interval.main.temp_min}  &deg; C
+                            Lowest {this.props.interval.main.temp_min}  &deg; {this.props.unitInfo.short}
                             <br />
                             {this.props.interval.weather[0].description}
                             <br />

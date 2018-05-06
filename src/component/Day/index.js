@@ -2,12 +2,8 @@ import React, { Component } from 'react';
 import './Day.css';
 
 class Day extends Component {
-    constructor(props) {
-      super(props);
-    }
 
     render() {
-        console.log(this.props.interval);
         return (
             <div>
                 <div className="small-2 medium-3 column weather-icon">
@@ -19,18 +15,18 @@ class Day extends Component {
                 </div>
 
                 <div>
-                    {this.props.interval.main.temp} &deg; Celcius 
-                    <br />
-                    Highest {this.props.interval.main.temp_max} &deg; C
-                    <br />
-                    Lowest {this.props.interval.main.temp_min}  &deg; C
-                    <br />
-                    {this.props.interval.weather[0].description}
-                    <br />
-                    Wind speed {this.props.interval.wind.speed} m/s
-                    <br />
-                    Humidity {this.props.interval.main.humidity} %
-                </div>
+                {this.props.interval.main.temp} &deg; {this.props.unitInfo.name} 
+                <br />
+                Highest {this.props.interval.main.temp_max} &deg; {this.props.unitInfo.short}
+                <br />
+                Lowest {this.props.interval.main.temp_min}  &deg; {this.props.unitInfo.short}
+                <br />
+                {this.props.interval.weather[0].description}
+                <br />
+                Wind speed {this.props.interval.wind.speed} m/s
+                <br />
+                Humidity {this.props.interval.main.humidity} %
+            </div>
             </div>
         );
     }

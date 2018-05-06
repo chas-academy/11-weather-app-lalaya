@@ -30,9 +30,16 @@ class FormGeographic extends Component {
     
     /* API for Geographic */ 
     componentDidMount() {
-        
-        if((this.state.coordinates.longitude && this.state.coordinates.latitude) !== 0) {
-            fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${this.state.coordinates.latitude}&lon=${this.state.coordinates.longitude}&APPID=d87dbcdd5af33f7b33168db052c38feb&units=metric`)
+        this.search(this.props.geographic, this.props.unit);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.search(nextProps.geographic, nextProps.unit);
+    }
+
+    search(coordinates, unit) {
+        if((coordinates.longitude && coordinates.latitude) !== 0) {
+            fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${coordinates.latitude}&lon=${coordinates.longitude}&APPID=d87dbcdd5af33f7b33168db052c38feb&units=${unit}`)
             .then(this.handleErrors)
             .then(res => res.json())
             .then(res => {
@@ -45,14 +52,13 @@ class FormGeographic extends Component {
             });
             
         }
-        console.log(this.state.geographic);
     }
     
     render() {
         return (
             <div>
             <div className="App-forecast">
-            {this.state.geographic && <Geographic interval={this.state.geographic} />}
+            {this.state.geographic && <Geographic interval={this.state.geographic}  unitInfo={this.props.unitInfo} />}
             </div>
             </div>
         );     

@@ -16,7 +16,11 @@ class FormHourly extends Component {
     }
 
     componentDidMount() {
-        this.search(this.props.searchForCity);
+        this.search(this.props.searchForCity, this.props.unit);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.search(nextProps.searchForCity, nextProps.unit);
     }
 
     onOffClick() {
@@ -34,25 +38,27 @@ class FormHourly extends Component {
 
 
     // API for 24 hours
-    search (cityname) {
-        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityname}&APPID=d87dbcdd5af33f7b33168db052c38feb&units=metric`)
-            .then(this.handleErrors)
-            .then(res => res.json())
-            .then(res => {
-                this.setState({
-                    weather: res
+    search (cityname, unit) {
+        if(cityname) {
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityname}&APPID=d87dbcdd5af33f7b33168db052c38feb&units=${unit}`)
+                .then(this.handleErrors)
+                .then(res => res.json())
+                .then(res => {
+                    this.setState({
+                        weather: res
+                    });
+                })
+                .catch(function(error) {
+                    console.log(error);
                 });
-            })
-            .catch(function(error) {
-                console.log(error);
-            });
+        }
     }
 
     render() {
         return (
             <div>
                 <div className="App-forecast">
-                {this.state.weather && <Hourly interval={this.state.weather} />}
+                {this.state.weather && <Hourly interval={this.state.weather} unitInfo={this.props.unitInfo} />}
                 </div>
             </div>
         );     

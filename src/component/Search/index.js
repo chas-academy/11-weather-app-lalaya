@@ -10,15 +10,26 @@ class Search
         constructor(props) {
         super(props);
         this.state = { 
-            resultsMode : '',
+            resultsMode : 'Hourly',
             searchForCity: '',
-            position: []
+            temperatureUnit: 'metric',
+            position: [],
+            unitInformation : {
+                metric: {
+                    name:'Celcius',
+                    short:'C'
+                },
+                imperial: {
+                    name:'Farenheit',
+                    short:'F'
+                }
+            }
         }
         
         this.hourlyButtonClicked = this.hourlyButtonClicked.bind(this); 
         this.dayButtonClicked = this.dayButtonClicked.bind(this); 
-        this.geographicButtonClicked = this.geographicButtonClicked.bind(this); 
-
+        this.geographicButtonClicked = this.geographicButtonClicked.bind(this);
+        this.chooseTemperatureClicked = this.chooseTemperatureClicked.bind(this); 
         }
 
         hourlyButtonClicked() {
@@ -53,7 +64,11 @@ class Search
         }
 
         chooseTemperatureClicked() {
-            this.setState({resultMode : ''});
+            let newUnit = 'metric';
+            if (this.state.temperatureUnit === 'metric') {
+                newUnit = 'imperial';                 
+            } 
+            this.setState({temperatureUnit : newUnit}); 
         } 
 
         handleError(response) {
@@ -73,11 +88,11 @@ class Search
     renderForecastComponent = () => {
             switch (this.state.resultsMode) {
                 case "Hourly":
-                    return <FormHourly searchForCity={this.state.searchForCity}/>
+                    return <FormHourly searchForCity={this.state.searchForCity} unit={this.state.temperatureUnit} unitInfo={this.state.unitInformation[this.state.temperatureUnit]} />
                 case "Day":
-                    return <FormDay searchForCity={this.state.searchForCity}/>
+                    return <FormDay searchForCity={this.state.searchForCity} unit={this.state.temperatureUnit} unitInfo={this.state.unitInformation[this.state.temperatureUnit]} />
                 case "Geographic":
-                    return <FormGeographic geographic={this.state.position}/>
+                    return <FormGeographic geographic={this.state.position} unit={this.state.temperatureUnit} unitInfo={this.state.unitInformation[this.state.temperatureUnit]} />
                 default:
                     return null;
         }

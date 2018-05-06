@@ -11,6 +11,7 @@ class App extends Component {
         <Content>
           <Search />
         </Content>
+        
         <Footer />
       </div>
     );

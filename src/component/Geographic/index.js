@@ -14,18 +14,18 @@ class Geographic extends Component {
                         </div>
 
                         <div>
-                            {this.props.interval.main.temp} &deg; Celcius 
+                            {this.props.interval.main.temp} &deg; {this.props.unitInfo.name} 
                             <br />
-                            Highest {this.props.interval.main.temp_max} &deg; C
+                            Highest {this.props.interval.main.temp_max} &deg; {this.props.unitInfo.short}
                             <br />
-                            Lowest {this.props.interval.main.temp_min}  &deg; C
+                            Lowest {this.props.interval.main.temp_min}  &deg; {this.props.unitInfo.short}
                             <br />
                             {this.props.interval.weather[0].description}
                             <br />
                             Wind speed {this.props.interval.wind.speed} m/s
                             <br />
                             Humidity {this.props.interval.main.humidity} %
-                        </div>           
+                        </div>         
                     </div>
                 ) : (
                     ""

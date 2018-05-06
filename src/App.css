@@ -27,16 +27,26 @@ h4 {
   font-size: large;
 }
 
+
 .button {
   background-color: rgb(76, 97, 187);
   border-color: rgb(76, 97, 187);
 }
 
+fieldset {
+  padding-top: 50px;
+}
+
 #cityField {
-  width: 80%; 
+  width: 60%; 
 }
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+#hello {
+  height: 800px;
+  background-color: indigo;
 }
