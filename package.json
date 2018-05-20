@@ -16,5 +16,6 @@
     "serve:prod": "serve -s build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "homepage" : "http://layasadegh.chas.academy/11/"
 }
